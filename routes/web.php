@@ -13,5 +13,13 @@ Route::group(['namespace' => 'Frontend'], function () {
 
 
 Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], function () {
-    Route::get('/', 'BackendController@index');
+    Route::get('/', 'BackendController@index')->name('admin-dashboard');
+
+    Route::group(['prefix' => 'news'], function () {
+        Route::get('/', 'NewsController@index')->name('admin-news');
+        Route::get('/add', 'NewsController@add')->name('admin-news-add');
+        Route::get('/update/{id}', 'NewsController@update')->name('admin-news-update')->where(['id' => '[0-9]+']);
+        Route::get('/delete/{id}', 'NewsController@delete')->name('admin-news-delete')->where(['id' => '[0-9]+']);
+    });
+
 });
