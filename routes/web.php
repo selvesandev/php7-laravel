@@ -16,6 +16,8 @@ Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], 
     Route::get('/', 'BackendController@index')->name('admin-dashboard');
 
     Route::group(['prefix' => 'news'], function () {
+        Route::get('/categories', 'CategoriesController@index')->name('admin-categories');
+        Route::post('/categories', 'CategoriesController@addAction');
         Route::get('/', 'NewsController@index')->name('admin-news');
         Route::get('/add', 'NewsController@add')->name('admin-news-add');
         Route::get('/update/{id}', 'NewsController@update')->name('admin-news-update')->where(['id' => '[0-9]+']);

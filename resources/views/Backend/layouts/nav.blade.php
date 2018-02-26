@@ -34,6 +34,7 @@
 
                     <li><a><i class="fa fa-newspaper-o"></i> News <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
+                            <li><a href="{{route('admin-categories')}}">Categories</a></li>
                             <li><a href="{{route('admin-news')}}">View</a></li>
                             <li><a href="{{route('admin-news-add')}}">Add</a></li>
                         </ul>
