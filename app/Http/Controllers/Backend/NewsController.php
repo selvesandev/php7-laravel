@@ -19,6 +19,11 @@ class NewsController extends Controller
         return view($this->_view . 'add');
     }
 
+    public function addAction(Request $request)
+    {
+        return $request->all();
+    }
+
     public function update($id)
     {
 
@@ -29,4 +34,6 @@ class NewsController extends Controller
     {
         return 'delete ' . $id;
     }
+
+
 }

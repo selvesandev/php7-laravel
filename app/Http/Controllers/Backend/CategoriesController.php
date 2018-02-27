@@ -13,7 +13,7 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $this->_data['categories'] = Category::all();
+        $this->_data['categories'] = Category::paginate(3);
         return view($this->_view . 'add', $this->_data);
     }
 
@@ -34,5 +34,22 @@ class CategoriesController extends Controller
             return redirect()->back()->with('success', 'Category was created');
         }
         return redirect()->back()->with('fail', 'There was some problem');
+    }
+
+
+    public function updateStatus(Request $request)
+    {
+        $id = (int)$request->id;
+
+        $category = Category::findOrFail($id);
+
+        if (isset($request->_disable)) {
+            $category->status = 0;
+        } else {
+            $category->status = 1;
+        }
+        $category->save();
+
+        return redirect()->back()->with('success', 'Category Was Updated');
     }
 }

@@ -44,9 +44,10 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Category Name</th>
+                            <th width="50%">Category Name</th>
                             <th>Status</th>
                             <th>Created At</th>
+                            <th width="10%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -55,15 +56,27 @@
                                 <th scope="row">{{++$key}}</th>
                                 <td>{{$category->name}}</td>
                                 <td>
-                                    <form action="">
+                                    <form action="{{route('update-cat-status')}}" method="post">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="id" value="{{$category->id}}">
                                         @if($category->status)
-                                            <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                                            <button name="_disable" type="submit" value="disable"
+                                                    class="btn btn-danger btn-xs">
+                                                <i
+                                                        class="fa fa-times"></i></button>
                                         @else
-                                            <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                            <button type="submit" name="_enable" value="enable"
+                                                    class="btn btn-success btn-xs"><i
+                                                        class="fa fa-check"></i>
+                                            </button>
                                         @endif
                                     </form>
                                 </td>
                                 <td>{{$category->created_at->diffForHumans()}}</td>
+                                <td>
+                                    <a href="" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                    <a href="" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
+                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -72,6 +85,8 @@
                         @endforelse
                         </tbody>
                     </table>
+
+                    {{$categories->links()}}
 
                 </div>
             </div>

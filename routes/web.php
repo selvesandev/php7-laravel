@@ -16,10 +16,17 @@ Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], 
     Route::get('/', 'BackendController@index')->name('admin-dashboard');
 
     Route::group(['prefix' => 'news'], function () {
-        Route::get('/categories', 'CategoriesController@index')->name('admin-categories');
-        Route::post('/categories', 'CategoriesController@addAction');
+
+        Route::group(['prefix' => 'categories'], function () {
+            Route::get('/', 'CategoriesController@index')->name('admin-categories');
+            Route::post('/', 'CategoriesController@addAction');
+            Route::post('/update-status', 'CategoriesController@updateStatus')->name('update-cat-status');
+        });
+
+
         Route::get('/', 'NewsController@index')->name('admin-news');
         Route::get('/add', 'NewsController@add')->name('admin-news-add');
+        Route::post('/add', 'NewsController@addAction');
         Route::get('/update/{id}', 'NewsController@update')->name('admin-news-update')->where(['id' => '[0-9]+']);
         Route::get('/delete/{id}', 'NewsController@delete')->name('admin-news-delete')->where(['id' => '[0-9]+']);
     });

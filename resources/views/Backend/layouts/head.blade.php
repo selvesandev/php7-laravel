@@ -16,6 +16,10 @@
     <!-- NProgress -->
     <link href="{{URL::to('lib/nprogress/nprogress.css')}}" rel="stylesheet">
 
+    <!-- Date time picker -->
+    <link href="{{URL::to('lib/bootstrap-datetimepicker/datetimepicker.css')}}" rel="stylesheet">
+
+
     <!-- Custom Theme Style -->
     <link href="{{URL::to('css/custom.min.css')}}" rel="stylesheet">
 </head>
