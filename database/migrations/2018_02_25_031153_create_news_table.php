@@ -23,8 +23,8 @@ class CreateNewsTable extends Migration
             $table->longText('details');
             $table->text('summary');
             $table->integer('admin_id')->unsigned()->nullable();
-            $table->integer('share_count')->unsigned();
-            $table->integer('views_count')->unsigned();
+            $table->integer('share_count')->unsigned()->default(0);
+            $table->integer('views_count')->unsigned()->default(0);
             $table->timestamps();
         });
     }

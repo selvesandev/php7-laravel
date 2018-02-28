@@ -19,9 +19,11 @@
     <!-- Date time picker -->
     <link href="{{URL::to('lib/bootstrap-datetimepicker/datetimepicker.css')}}" rel="stylesheet">
 
+@yield('my-css')
 
-    <!-- Custom Theme Style -->
+<!-- Custom Theme Style -->
     <link href="{{URL::to('css/custom.min.css')}}" rel="stylesheet">
+
 </head>
 
 <body class="nav-md">

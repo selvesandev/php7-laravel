@@ -10,5 +10,8 @@
 <script src="{{URL::to('/js/custom.min.js')}}"></script>
 <script src="{{URL::to('/js/app.js')}}"></script>
 
+
+@yield('my-script')
+
 </body>
 </html>
