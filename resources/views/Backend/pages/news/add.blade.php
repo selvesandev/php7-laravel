@@ -11,7 +11,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <form method="post" action="{{route('admin-news-add')}}"
+                    <form method="post" enctype="multipart/form-data" action="{{route('admin-news-add')}}"
                           class="form-horizontal form-label-left input_mask">
                         {{csrf_field()}}
 

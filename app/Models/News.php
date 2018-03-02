@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,4 +20,14 @@ class News extends Model
         'share_count',
         'views_count'
     ];
+
+
+    public function categories()
+    {
+        return $this->belongsToMany(
+            'App\Models\Category',
+            'news_categories',
+            'news_id',
+            'category_id');
+    }
 }

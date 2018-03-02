@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
+use Image;
+use DB;
 
 class NewsController extends Controller
 {
@@ -13,7 +16,8 @@ class NewsController extends Controller
 
     public function index()
     {
-        return 'test';
+        $this->_data['news'] = News::all();
+        return view($this->_view . 'view', $this->_data);
     }
 
     public function add()
@@ -35,6 +39,7 @@ class NewsController extends Controller
             'details' => 'required'
         ]);
 
+
         $insertData['title'] = strip_tags($request->title);
         $insertData['slug'] = str_slug($request->title);
         $insertData['news_date'] = $request->news_date;
@@ -44,16 +49,32 @@ class NewsController extends Controller
         $insertData['details'] = htmlspecialchars($request->details);
 
 
-        //data collection
-        //image process
-        //data add image name
-        //insert
-        //last inserted id and selected category goes into news_categories
-        //redirect back
-        //redirect to
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = strtolower($file->extension());
+
+            $newName = time() . '_.' . $extension;
+            Image::make($file)->resize(300, null, function ($ar) {
+                $ar->aspectRatio();
+            })->crop(200, 200)->save(public_path('Uploads/News/' . $newName));
+
+            $insertData['image'] = $newName;
+        }
 
 
-        return $request->all();
+        $catNum = 0;
+        $categories = $request->categories;
+        if ($news = News::create($insertData)) {
+            $newsId = $news->id;
+
+            foreach ($categories as $category) {
+                $newsCatData['news_id'] = $newsId;
+                $newsCatData['category_id'] = $category;
+                DB::table('news_categories')->insert($newsCatData);
+                $catNum++;
+            }
+        }
+        return redirect()->route('admin-news')->with('success', 'News was added successfully with ' . $catNum . ' categories');
     }
 
     public function update($id)

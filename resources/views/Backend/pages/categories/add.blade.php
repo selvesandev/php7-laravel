@@ -54,7 +54,12 @@
                         @forelse($categories as $key=> $category)
                             <tr>
                                 <th scope="row">{{++$key}}</th>
-                                <td>{{$category->name}}</td>
+                                <td>{{$category->name}} <big>&gt;</big>
+
+                                    @foreach($category->news as $news)
+                                        <span class="label label-default">{{str_limit($news->title,8)}} </span>
+                                    @endforeach
+                                </td>
                                 <td>
                                     <form action="{{route('update-cat-status')}}" method="post">
                                         {{csrf_field()}}
