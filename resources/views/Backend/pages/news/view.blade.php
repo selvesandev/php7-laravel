@@ -13,6 +13,12 @@
                 <div class="x_content">
                     @include('Backend.includes.message')
 
+                    @if($hasHigh===false)
+                        <div class="alert alert-warning">
+                            You must have at least one news with <code>high</code> Priority.
+                        </div>
+                    @endif
+
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -47,11 +53,23 @@
                                     <p title="{{$new->summary}}">{{str_limit($new->summary,50)}}</p>
                                 </td>
                                 <td>
-
+                                    <form method="post" action="{{route('update-priority',['id'=>$new->id])}}">
+                                        {{csrf_field()}}
+                                        @if($new->priority==='high')
+                                            <button type="submit" name="degrade" value="degrade"
+                                                    class="btn btn-success btn-xs">Degrade
+                                            </button>
+                                        @else
+                                            <button value="upgrade" type="submit" name="upgrade"
+                                                    class="btn btn-default btn-xs">Upgrade
+                                            </button>
+                                        @endif
+                                    </form>
                                 </td>
                                 <td></td>
                                 <td>
-                                    <a href="" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('admin-news-delete',['id'=>$new->id])}}"
+                                       class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                                     <a href="" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
                                 </td>
                             </tr>

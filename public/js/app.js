@@ -161,7 +161,7 @@ __webpack_require__(3);
 /***/ (function(module, exports) {
 
 $('#date-time-picker').datetimepicker({
-    format: 'Y-M-d H:m:s'
+    format: 'YYYY-MM-DD HH:mm:ss'
 });
 
 /***/ }),

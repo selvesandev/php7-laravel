@@ -39,6 +39,14 @@
                             <li><a href="{{route('admin-news-add')}}">Add</a></li>
                         </ul>
                     </li>
+
+
+                    <li><a><i class="fa fa-user-secret"></i> Admins <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('view-admin')}}">View</a></li>
+                            <li><a href="{{route('add-admin')}}">Add</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

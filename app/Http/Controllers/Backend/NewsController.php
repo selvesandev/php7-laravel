@@ -17,6 +17,13 @@ class NewsController extends Controller
     public function index()
     {
         $this->_data['news'] = News::all();
+        $priorityHighCount = News::where(['priority' => 'high'])->count();
+
+        $this->_data['hasHigh'] = true;
+        if ($priorityHighCount <= 0) {
+            $this->_data['hasHigh'] = false;
+        }
+
         return view($this->_view . 'view', $this->_data);
     }
 
@@ -85,8 +92,36 @@ class NewsController extends Controller
 
     public function delete($id)
     {
-        return 'delete ' . $id;
+        $id = (int)$id;
+        $news = News::findOrFail($id);
+
+
+        if (News::where(['id' => $id])->delete()) {
+            $newImage = $news->image;
+            if (file_exists(public_path('Uploads/News/' . $newImage))) {
+                unlink(public_path('Uploads/News/' . $newImage));
+            }
+            DB::table('news_categories')->where(['news_id' => $id])->delete();
+        }
+
+        return redirect()->back()->with('success', 'News was deleted #' . $id);
     }
 
+
+    public function updatePriority(Request $request, $id)
+    {
+        $id = (int)$id;
+
+        if (isset($request->degrade)) {
+            $msg = 'Degraded';
+            News::where(['id' => $id])->update(['priority' => 'low']);
+        } else {
+            News::where(['priority' => 'high'])->update(['priority' => 'low']);
+            News::where(['id' => $id])->update(['priority' => 'high']);
+            $msg = 'Upgraded';
+        }
+        return redirect()->back()->with('success', 'Priority ' . $msg);
+
+    }
 
 }

@@ -38,8 +38,6 @@
                         </div>
                     </form>
                     <div class="ln_solid"></div>
-
-
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -55,7 +53,6 @@
                             <tr>
                                 <th scope="row">{{++$key}}</th>
                                 <td>{{$category->name}} <big>&gt;</big>
-
                                     @foreach($category->news as $news)
                                         <span class="label label-default">{{str_limit($news->title,8)}} </span>
                                     @endforeach
@@ -67,8 +64,7 @@
                                         @if($category->status)
                                             <button name="_disable" type="submit" value="disable"
                                                     class="btn btn-danger btn-xs">
-                                                <i
-                                                        class="fa fa-times"></i></button>
+                                                <i class="fa fa-times"></i></button>
                                         @else
                                             <button type="submit" name="_enable" value="enable"
                                                     class="btn btn-success btn-xs"><i

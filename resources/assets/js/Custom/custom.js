@@ -1,3 +1,3 @@
 $('#date-time-picker').datetimepicker({
-    format: 'Y-M-d H:m:s'
+    format: 'YYYY-MM-DD HH:mm:ss'
 });
