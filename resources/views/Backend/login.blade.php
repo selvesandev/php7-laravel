@@ -35,7 +35,7 @@
 
                     <div>
                         <label class="pull-left" for="remember">
-                            <input type="checkbox" name="remember_me" class="pull-left">
+                            <input type="checkbox" name="remember_me" value="remember_me" class="pull-left">
                             &nbsp; Remember Me
                         </label>
                     </div>

@@ -9,6 +9,11 @@ class AppController extends Controller
 {
     private $_view = 'Frontend.pages.';
 
+    public function __construct()
+    {
+//        $this->middleware(['checkAge'])->except(['about']);
+    }
+
     public function index()
     {
         $data = [
@@ -16,18 +21,18 @@ class AppController extends Controller
             'age' => 20,
             'address' => 'kalanki'
         ];
-        return view($this->_view.'home', $data);
+        return view($this->_view . 'home', $data);
     }
 
 
     public function contact()
     {
-        return view($this->_view.'contact');
+        return view($this->_view . 'contact');
     }
 
     public function about()
     {
-        return view($this->_view.'about');
+        return view($this->_view . 'about');
     }
 
 

@@ -41,11 +41,15 @@ class AdminController extends Controller
             $data['privileges'] = $request->privileges;
         }
 
-
         if (Admin::create($data)) {
             return redirect()->route('view-admin')->with('success', 'Admin was added.');
         }
 
         return redirect()->back()->with('fail', 'There was some problem');
+    }
+
+    public function updateProfile()
+    {
+
     }
 }

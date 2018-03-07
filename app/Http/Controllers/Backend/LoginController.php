@@ -15,14 +15,21 @@ class LoginController extends Controller
 
     public function loginAction(Request $request)
     {
-        Auth::guard('admins')->attempt(['email' => 'p']);
+        $email = $request->email;
+        $password = $request->password;
+        $rememberMe = isset($request->remember_me);
 
-        return $request->all();
+        if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password], $rememberMe)) {
+            return redirect()->intended(route('admin-dashboard'));
+        }
+
+        return redirect()->back()->with('fail', 'Invalid Email or Password Combination.');
     }
 
 
     public function logout()
     {
-
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin-login');
     }
 }
