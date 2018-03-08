@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -16,6 +17,7 @@ class AppController extends Controller
 
     public function index()
     {
+        $data['news'] = News::all();
         $data = [
             'name' => 'ram',
             'age' => 20,
@@ -27,7 +29,7 @@ class AppController extends Controller
 
     public function contact()
     {
-        return view($this->_view . 'contact');
+        return view($this->_view . 'contact', $data);
     }
 
     public function about()

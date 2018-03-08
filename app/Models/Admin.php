@@ -19,6 +19,6 @@ class Admin extends Authenticatable
 
     public function setPasswordAttribute($name)
     {
-        $this->attributes['password'] = bcrypt($name);
+//        $this->attributes['password'] = bcrypt($name);
     }
 }

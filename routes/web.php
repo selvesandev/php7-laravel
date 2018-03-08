@@ -6,7 +6,6 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/', 'AppController@index');
     Route::get('/contact/{age}', 'AppController@contact')->name('my-contact-route')->middleware('checkAge');
     Route::get('/about', 'AppController@about')->name('my-about-route')->middleware('auth');
-
     Route::get('/test-route', 'AppController@xyz');
 
     Route::match(['get', 'post'], '/get-post', 'AppController@onAny');
@@ -40,6 +39,8 @@ Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], 
 
 
         Route::get('/update/profile', 'AdminController@updateProfile')->name('update-profile');
+        Route::post('/update/profile', 'AdminController@updateProfileAction');
+        Route::post('/update/password', 'AdminController@updatePasswordAction')->name('update-admin-password');
 
         Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function () {
             Route::get('/add', 'AdminController@add')->name('add-admin');

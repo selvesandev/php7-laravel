@@ -21,6 +21,7 @@ class ApiController extends Controller
         $id = (int)$request->id;
         $blog = Blog::find($id);
 
+
         return response()->json(['status' => true, 'blog' => $blog]);
     }
 

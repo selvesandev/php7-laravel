@@ -19,11 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 //Blog Routes
-
 Route::group(['prefix' => 'blog'], function () {
-    Route::get('get', 'ApiController@getBlogs');
+    Route::post('get-rashifal-mesh', 'ApiController@getBlogs');
     Route::get('get/{id}', 'ApiController@getSingleBlog')->where('id', '[0-9]+');
     Route::post('insert', 'ApiController@insertBlog');
     Route::post('update', 'ApiController@updateBlog');
-    Route::get('delete/{id}', 'ApiController@deleteBlog')->where('id','[0-9]+');
+    Route::get('delete/{id}', 'ApiController@deleteBlog')->where('id', '[0-9]+');
 });
