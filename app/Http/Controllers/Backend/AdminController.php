@@ -91,13 +91,16 @@ class AdminController extends Controller
         $oldPassword = $loggedUser->password;
 
         $this->validate($request, [
-            'old_password' => ['required', new OldPasswordCheck($oldPassword)],
+            'old_password' => [
+                'required',
+                new OldPasswordCheck($oldPassword)],
             'password' => 'required|confirmed'
         ]);
 
-        $admin = Admin::find($loggedUserId);
-        $admin->password = bcrypt($request->password);
-        $admin->save();
+        $admin = Admin::where(['id' => $loggedUserId])->update([
+            'password' => bcrypt($request->password)
+        ]);
+        Auth::guard('');
 
         return redirect()->back()->with('success', 'password updated successfully');
     }

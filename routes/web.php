@@ -7,13 +7,14 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/contact/{age}', 'AppController@contact')->name('my-contact-route')->middleware('checkAge');
     Route::get('/about', 'AppController@about')->name('my-about-route')->middleware('auth');
     Route::get('/test-route', 'AppController@xyz');
+    Route::get('/categories/{id}', 'AppController@newsByCategory')->name('category-news');
+    Route::get('/news/{slug}', 'AppController@getSingle')->name('news-single');
 
     Route::match(['get', 'post'], '/get-post', 'AppController@onAny');
 });
 
 
 Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], function () {
-
     Route::get('/login', 'LoginController@login')->name('admin-login');
     Route::post('/login', 'LoginController@loginAction');
     Route::any('/logout', 'LoginController@logout')->name('admin-logout');
