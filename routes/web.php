@@ -1,6 +1,8 @@
 <?php
 
 
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+
 Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/', 'AppController@index');
@@ -55,3 +57,6 @@ Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], 
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('bugsnag', function () {
+    Bugsnag::notifyException(new RuntimeException("Test error"));
+});
