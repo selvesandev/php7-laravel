@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
 
 //        factory(\App\Models\Blog::class, 100)->create();
         factory(\App\Models\User::class, 20)->create();
+//        $this->command->info('User created');
     }
 
 }

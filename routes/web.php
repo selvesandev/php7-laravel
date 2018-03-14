@@ -58,5 +58,5 @@ Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('bugsnag', function () {
-    Bugsnag::notifyException(new RuntimeException("Test error"));
+    Bugsnag::notifyException(new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException("Selvesan's Test error"));
 });

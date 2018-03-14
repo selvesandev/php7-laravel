@@ -27,5 +27,13 @@
             <hr>
         @endforeach
     </div>
+
+
+    @guest
+        I am Guest
+        @else
+            I am Logged in as {{Auth::user()->name}}
+            @endguest
+
 @endsection
 

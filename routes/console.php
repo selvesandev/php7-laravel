@@ -14,5 +14,10 @@ use Illuminate\Foundation\Inspiring;
 */
 
 Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
+    $this->error(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+
+Artisan::command('hello {name}', function ($name) {
+    $this->info('Hello ' . $name);
+})->describe('print hello world');

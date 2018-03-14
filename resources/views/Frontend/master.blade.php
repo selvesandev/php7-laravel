@@ -8,5 +8,4 @@
     </div>
 </div>
 
-
-@include('Frontend.layouts.foot')
+        @include('Frontend.layouts.foot')

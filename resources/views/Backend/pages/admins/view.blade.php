@@ -29,7 +29,15 @@
                         @forelse($admins as $key=> $admin)
                             <tr>
                                 <td>{{++$key}}</td>
-                                <td>{{$admin->name}}</td>
+                                <td>{{$admin->name}}
+                                    <br>
+                                    @foreach($admin->news as  $key => $news)
+                                        {{str_limit($news->title,5)}}
+                                        @if(!$loop->last)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td>
                                     @if($admin->privileges=='admin')
                                         <i class="fa fa-user fa-2x"></i>

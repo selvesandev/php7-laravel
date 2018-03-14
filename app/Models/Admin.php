@@ -21,4 +21,10 @@ class Admin extends Authenticatable
     {
 //        $this->attributes['password'] = bcrypt($name);
     }
+
+
+    public function news()
+    {
+        return $this->hasMany('App\Models\News', 'admin_id', 'id');
+    }
 }

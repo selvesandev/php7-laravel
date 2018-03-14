@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Image;
 use DB;
 
@@ -46,6 +47,7 @@ class NewsController extends Controller
             'details' => 'required'
         ]);
 
+        $loggedAdminId = Auth::guard('admin')->user()->id;
 
         $insertData['title'] = strip_tags($request->title);
         $insertData['slug'] = str_slug($request->title);
@@ -54,6 +56,7 @@ class NewsController extends Controller
         $insertData['meta_keywords'] = $request->meta_keywords;
         $insertData['summary'] = $request->summary;
         $insertData['details'] = htmlspecialchars($request->details);
+        $insertData['admin_id'] = $loggedAdminId;
 
 
         if ($request->hasFile('image')) {

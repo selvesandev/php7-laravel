@@ -38,7 +38,11 @@
                         @forelse($news as $key=> $new)
                             <tr>
                                 <td>{{++$key}}</td>
-                                <td>{{$new->title}}</td>
+                                <td>{{$new->title}}
+                                    @if($new->admin)
+                                        ({{$new->admin->name}})
+                                    @endif
+                                </td>
                                 <td>
                                     @foreach($new->categories as $newsCategory)
                                         <span class="label label-default">{{$newsCategory->name}}</span>

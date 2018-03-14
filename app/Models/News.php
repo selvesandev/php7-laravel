@@ -30,4 +30,9 @@ class News extends Model
             'news_id',
             'category_id');
     }
+
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin', 'admin_id', 'id');
+    }
 }
