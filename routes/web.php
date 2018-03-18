@@ -11,7 +11,6 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/test-route', 'AppController@xyz');
     Route::get('/categories/{id}', 'AppController@newsByCategory')->name('category-news');
     Route::get('/news/{slug}', 'AppController@getSingle')->name('news-single');
-
     Route::match(['get', 'post'], '/get-post', 'AppController@onAny');
 });
 
@@ -23,6 +22,7 @@ Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], 
 
     Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/', 'BackendController@index')->name('admin-dashboard');
+
         Route::group(['prefix' => 'news'], function () {
 
             Route::group(['prefix' => 'categories'], function () {
@@ -37,6 +37,7 @@ Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], 
             Route::get('/update/{id}', 'NewsController@update')->name('admin-news-update')->where(['id' => '[0-9]+']);
             Route::get('/delete/{id}', 'NewsController@delete')->name('admin-news-delete')->where(['id' => '[0-9]+']);
             Route::post('/update/priority/{id}', 'NewsController@updatePriority')->name('update-priority')->where(['id' => '[0-9]+']);
+            Route::post('/update/status', 'NewsController@updateStatus')->name('update-news-status');
 
         });
 

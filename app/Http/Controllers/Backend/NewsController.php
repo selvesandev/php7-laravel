@@ -124,7 +124,15 @@ class NewsController extends Controller
             $msg = 'Upgraded';
         }
         return redirect()->back()->with('success', 'Priority ' . $msg);
+    }
 
+    public function updateStatus(Request $request)
+    {
+        $id = $request->id;
+        $type = $request->type;
+        //
+
+        return response()->json(['ajax' => 'was successfull']);
     }
 
 }

@@ -1,3 +1,11 @@
+<script>
+    var server = {
+        _url: '{{URL::to('/')}}',
+        _admin_url: '{{URL::to('/').'/'.config('site.admin')}}',
+        _token: '{{csrf_token()}}'
+    };
+</script>
+
 <script src="{{URL::to('lib/jquery/jquery.min.js')}}"></script>
 <script src="{{URL::to('lib/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 
@@ -9,7 +17,6 @@
 <!-- Custom Theme Scripts -->
 <script src="{{URL::to('/js/custom.min.js')}}"></script>
 <script src="{{URL::to('/js/app.js')}}"></script>
-
 
 @yield('my-script')
 
