@@ -22,7 +22,16 @@ class AppController extends Controller
         $data['news'] = News::where(['status' => 1])->get();
 //        $data['categories'] = Category::where(['status' => 1])->get();
 
-        return view($this->_view . 'home', $data);
+        $news = News::all();
+        $categories = Category::all();
+
+        $compatcted = compact('news', 'categories');
+        echo "<pre>";
+        print_r($compatcted);
+        echo "</pre>";
+        die;
+
+        return view($this->_view . 'home', compact("news", "categories"));
     }
 
 

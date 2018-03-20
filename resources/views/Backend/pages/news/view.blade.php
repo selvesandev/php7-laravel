@@ -50,16 +50,15 @@
                                 </td>
                                 <td><img height="30" src="{{URL::to('Uploads/News/'.$new->image)}}" alt=""></td>
                                 <td>{{$new->news_date}}</td>
-                                <td>
-                                    @if($new->status=='0')
-                                        <button data-id="{{$new->id}}" data-type="enable"
-                                                class="btn btn-default btn-xs status-update-button">Enable
-                                        </button>
-                                    @else
-                                        <button data-id="{{$new->id}}" data-type="disable"
-                                                class="btn btn-danger btn-xs status-update-button">Disable
-                                        </button>
-                                    @endif
+                                    <td class="status-action-bar">
+                                    <button style="display:{{$new->status=='0' ? 'block':'none'}}"
+                                            data-id="{{$new->id}}" data-type="enable"
+                                            class="btn btn-default btn-xs status-update-button enable-status">Enable
+                                    </button>
+                                    <button style="display:{{$new->status=='0' ? 'none':'block'}}"
+                                            data-id="{{$new->id}}" data-type="disable"
+                                            class="btn btn-danger btn-xs status-update-button disable-status">Disable
+                                    </button>
                                 </td>
                                 <td>
                                     <p title="{{$new->summary}}">{{str_limit($new->summary,50)}}</p>

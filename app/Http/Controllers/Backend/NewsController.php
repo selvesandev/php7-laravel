@@ -17,15 +17,19 @@ class NewsController extends Controller
 
     public function index()
     {
-        $this->_data['news'] = News::all();
+        $news = News::all();
         $priorityHighCount = News::where(['priority' => 'high'])->count();
 
-        $this->_data['hasHigh'] = true;
+
+
+        //Ajx request.
+
+        $hasHigh = true;
         if ($priorityHighCount <= 0) {
             $this->_data['hasHigh'] = false;
         }
 
-        return view($this->_view . 'view', $this->_data);
+        return view($this->_view . 'view', compact('news', 'hasHigh'));
     }
 
     public function add()
@@ -128,11 +132,27 @@ class NewsController extends Controller
 
     public function updateStatus(Request $request)
     {
-        $id = $request->id;
+        $id = (int)$request->id;
         $type = $request->type;
-        //
 
-        return response()->json(['ajax' => 'was successfull']);
+        if (!$id || !$type) return response()->json(['status' => false, 'msg' => 'There was some problem']);
+
+
+        $news = News::where(['id' => $id]);
+
+        $update = false;
+        switch ($type) {
+            case 'enable':
+                $update = $news->update(['status' => 1]);
+                break;
+            case 'disable':
+                $update = $news->update(['status' => 0]);
+                break;
+        }
+
+        if ($update)
+            return response()->json(['status' => true, 'message' => 'Status updated successfully']);
+        return response()->json(['status' => false, 'message' => 'There was some problem']);
     }
 
 }

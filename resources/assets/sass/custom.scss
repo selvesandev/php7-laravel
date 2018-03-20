@@ -1,8 +1,14 @@
+@import "~alertifyjs/build/css/alertify.css";
+
 $a: 50px;
 .x_content {
 
   .ln_solid {
     margin: $a 0;
   }
+}
+
+.ajs-success {
+  color: white !important;
 }
 
