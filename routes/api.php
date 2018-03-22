@@ -26,3 +26,6 @@ Route::group(['prefix' => 'blog'], function () {
     Route::post('update', 'ApiController@updateBlog');
     Route::get('delete/{id}', 'ApiController@deleteBlog')->where('id', '[0-9]+');
 });
+
+
+Route::post('/create-data', 'VueController@createData');

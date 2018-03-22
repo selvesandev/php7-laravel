@@ -19,6 +19,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "alertifyjs": "^1.11.0"
+        "alertifyjs": "^1.11.0",
+        "vue-router": "^3.0.1"
     }
 }

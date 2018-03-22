@@ -13,14 +13,16 @@
     <nav-component></nav-component>
 
     <div class="container">
-        <read-component></read-component>
-        <read-single-component></read-single-component>
-
-        <insert-component></insert-component>
-        <update-component></update-component>
+        <router-view></router-view>
     </div>
 
 </div>
+<script>
+    var server = {
+        _url: '{{URL::to('/')}}',
+        _token: '{{csrf_token()}}'
+    };
+</script>
 
 <script type="text/javascript" src="{{URL::to('/js/vuecomponent.js')}}"></script>
 </body>

@@ -15,7 +15,7 @@ Route::group(['namespace' => 'Frontend'], function () {
 });
 
 
-Route::get('/vue', 'VueController@index');
+Route::get('/vue/{page?}', 'VueController@index');
 
 
 Route::group(['prefix' => Config::get('site.admin'), 'namespace' => 'Backend'], function () {
