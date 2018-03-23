@@ -98,7 +98,6 @@
                 let requestUrl = server._url + '/api/create-data';
                 axios.post(requestUrl, this.userData).then((response) => {
                     let responseData = response.data;
-                    console.log(response.data);
                     if (responseData.status === true) {
                         this.success = true;
                         this.userData.uname = '';

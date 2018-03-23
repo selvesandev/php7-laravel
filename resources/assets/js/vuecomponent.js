@@ -13,6 +13,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: 'history',
     base: '/vue',
+    linkActiveClass: 'active',
     routes: [
         {
             path: '/',
@@ -25,6 +26,11 @@ const router = new VueRouter({
         {
             path: '/home',
             component: ReadComponent
+        },
+        {
+            path: '/edit/:id',
+            component: UpdateComponent,
+            name: 'edit-route'
         }
     ]
 });
@@ -36,7 +42,6 @@ Vue.component('update-component', UpdateComponent);
 Vue.component('read-single-component', require('./components/ReadSingleComponent.vue'));
 
 const app = new Vue({
-
     router,
     el: '#app'
 });

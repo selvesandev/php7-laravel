@@ -29,3 +29,6 @@ Route::group(['prefix' => 'blog'], function () {
 
 
 Route::post('/create-data', 'VueController@createData');
+Route::get('/get-data/{id?}', 'VueController@getData');
+Route::delete('/delete-data/{id}', 'VueController@deleteData');
+Route::post('/edit-data/{id}', 'VueController@editData');
