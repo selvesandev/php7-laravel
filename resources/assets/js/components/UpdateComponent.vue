@@ -82,6 +82,7 @@
                 axios.post(server._url + '/api/edit-data/' + id, this.userData).then(response => {
                     if (response.data.status === true) {
                         this.$router.push('/');//
+                        myEventBus.$emit('success');
                     }
                 });
             }
@@ -100,6 +101,7 @@
                     this.userData.hobby = response.data.vue.hobby;
                     this.userData.country = response.data.vue.country;
                     this.userData.address = response.data.vue.address;
+
 
                 }
             });

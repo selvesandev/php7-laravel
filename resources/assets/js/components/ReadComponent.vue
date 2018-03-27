@@ -17,23 +17,15 @@
                         <th width="15%">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr v-for="(data,key) in vueData">
-                        <td>{{++key}}</td>
-                        <td>{{data.uname}}</td>
-                        <td>{{data.email}}</td>
-                        <td>
-                            <button v-on:click="deleteAction(data.id)" class="btn btn-danger btn-sm">Del</button>
-                            <button v-on:click="editRedirect(data.id)" class="btn btn-default btn-sm">Edit</button>
-                            <button class="btn btn-success btn-sm">View</button>
-                        </td>
-                    </tr>
-                    <tr v-show="vueData.length<1">
-                        <td colspan="4">No Data Found. You can create a new one
-                            <router-link to="/create">here</router-link>
-                        </td>
-                    </tr>
-                    </tbody>
+
+                    <data-display v-on:edit="editRedirect($event.id)"
+                                  v-on:delete="deleteAction($event.id)"
+                                  v-on:view="viewDetails($event.id)"
+                                  :users="vueData">
+                        <h4>{{vueData.length+' users' }}</h4>
+                    </data-display>
+
+
                 </table>
             </div>
         </div>
@@ -41,7 +33,12 @@
 </template>
 
 <script>
+    import DataDisplay from './DataDisplay.vue';
+
     export default {
+        components: {
+            DataDisplay
+        },
         data() {
             return {
                 notification: {
@@ -51,7 +48,6 @@
                 vueData: [],
             }
         },
-
         methods: {
             deleteAction(id) {
                 if (!id) return false;
@@ -87,19 +83,41 @@
                 if (conf) {
                     this.$router.push({name: 'edit-route', params: {id: id}});
                 }
+            },
+            viewDetails(id) {
+                if (!id) return false;
+                this.$router.push({name: 'view-single', params: {id: id}});
             }
 
         },
         beforeCreate() {
 
         },
+        updated() {
+
+        },
         created() {
             this.fetchAllData();
+
+
+//            this.$on('edit', function (x) {
+//
+//            });
+//            this.$on('view', function () {
+//
+//            });
         },
         beforeMount() {
 
         },
         mounted() {
+            let $this = this;
+            myEventBus.$on('success', () => {
+                alert('successfully');
+                $this.notification.success = true;
+                $this.notification.message = 'Data updated';
+                console.log($this.notification);
+            });
         }
     }
 </script>

@@ -3,6 +3,8 @@
 
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
+Route::get('/send-email-test', 'HomeController@sendEmailTest');
+
 Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/', 'AppController@index');
